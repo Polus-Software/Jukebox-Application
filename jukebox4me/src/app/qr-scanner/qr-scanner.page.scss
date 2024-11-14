@@ -1,0 +1,19 @@
+.scanner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+}
+
+.scanner-frame {
+  width: 250px;
+  height: 250px;
+  background-color: rgba(100, 100, 100, 0.6);
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+ion-content {
+  --background: #0E0E0E;
+}
+

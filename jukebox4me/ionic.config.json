@@ -1,0 +1,7 @@
+{
+  "name": "Jukebox",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

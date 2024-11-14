@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "PWzy6TOfVzU=",
+  "success": true,
+  "projectFilePath": "D:\\Dot Net Projects\\Jukebox\\Jukebox\\Application\\Application.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\basheer.mk\\.nuget\\packages\\mediatr\\12.3.0\\mediatr.12.3.0.nupkg.sha512",
+    "C:\\Users\\basheer.mk\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
+    "C:\\Users\\basheer.mk\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\basheer.mk\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

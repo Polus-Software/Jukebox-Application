@@ -1,0 +1,114 @@
+<ion-menu side="end" contentId="main-content">
+    <ion-header>
+        <ion-toolbar>
+            <ion-title>Menu Content</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">This is the menu content.</ion-content>
+</ion-menu>
+
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button>
+                <img src="assets/icon/jukebox.png" alt="App Icon" style="width: 24px; height: 24px;" />
+            </ion-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+            <ion-menu-button>
+                <ion-icon name="menu-outline"></ion-icon>
+            </ion-menu-button>
+        </ion-buttons>
+    </ion-toolbar>
+    <ion-searchbar *ngIf="searchBarVisible" placeholder="Search songs here..." (ionInput)="onSearchInput($event)"
+        debounce="500"></ion-searchbar>
+</ion-header>
+
+<ion-content id="main-content" mode="md" style="overflow: hidden;">
+    <div class="song-list">
+        <ion-list>
+            <ng-container *ngIf="selectedSegment === TAB_ALLSONGS">
+                <ng-container *ngFor="let track of filteredPlaylist">
+                    <ion-item>
+                        <ion-thumbnail slot="start">
+                            <img [src]="track.thumbnailUrl || 'assets/default-image.jpg'" />
+                        </ion-thumbnail>
+                        <ion-label>
+                            <div class="track-info">
+                                <h2 class="ellipsis-single-line">{{ track.title }}</h2>
+                                <p class="ellipsis-single-line">{{ getArtistNames(track.artists) }}</p>
+                            </div>
+                        </ion-label>
+                        <div slot="end" class="right-controls">
+                            <ion-button fill="clear" class="icon-button" (click)="addToWishList(track)">
+                                <ion-icon name="add-circle-outline"></ion-icon>
+                            </ion-button>
+                            <p class="duration-time">{{ track.durationMs ?
+                                convertMillisecondsToMinutes(track.durationMs) : 'N/A' }}</p>
+                        </div>
+                    </ion-item>
+                </ng-container>
+            </ng-container>
+            <ng-container *ngIf="selectedSegment === TAB_WISHLIST">
+                <ng-container *ngFor="let track of wishListArray">
+                    <ion-item>
+                        <ion-thumbnail slot="start">
+                            <img [src]="track.thumbnailUrl" />
+                        </ion-thumbnail>
+                        <ion-label>
+                            <h2 class="ellipsis-single-line">{{ track.title }}</h2>
+                            <p class="ellipsis-single-line">{{ getArtistNames(track.artists) }}</p>
+                        </ion-label>
+                        <div slot="end" class="right-controls">
+                            <ion-button fill="clear" class="icon-button" (click)="toggleHeart(track)">
+                                <ion-icon [name]="track.isHeartClicked ? 'heart' : 'heart-outline'"
+                                    [style.color]="track.isHeartClicked ? '#F44336' : ''"></ion-icon>
+                            </ion-button>
+                            <p class="vote-count">{{ track.count }}</p>
+                        </div>
+                    </ion-item>
+                </ng-container>
+            </ng-container>
+        </ion-list>
+    </div>
+</ion-content>
+
+<ion-footer>
+    <div class="now-playing" *ngIf="nowPlaying?.id">
+        <ion-thumbnail slot="start">
+            <img [src]="nowPlaying.thumbnailUrl" alt="Album Cover" />
+        </ion-thumbnail>
+        <div class="now-playing-info">
+            <h5>Now Playing</h5>
+            <h2 class="ellipsis-single-line">{{ nowPlaying.title || 'Unknown Title' }}</h2>
+            <p class="ellipsis-single-line">{{ getArtistNames(nowPlaying.artists) }}</p>
+        </div>
+        <div class="now-playing-visualizer">
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+            <div class="visualizer-bar"></div>
+        </div>
+    </div>
+
+    <ion-segment [(ngModel)]="selectedSegment" (ionChange)="onSegmentChange($event)" mode="ios">
+        <ion-segment-button value="all">All Songs</ion-segment-button>
+        <ion-segment-button value="wishlist">Wishlist</ion-segment-button>
+    </ion-segment>
+
+    <div class="volume-control">
+        <div class="volume-range">
+            <ion-icon name="volume-high"></ion-icon>
+            <ion-range aria-label="Volume Control" class="range-position" [min]="1" [max]="3" step="1" snaps="true"
+                ticks="true" [(ngModel)]="volumeLevel" (ionChange)="onVolumeChange($event)" mode="md"></ion-range>
+        </div>
+        <div class="volume-labels">
+            <span class="volume-label low">Low</span>
+            <span class="volume-label medium">Medium</span>
+            <span class="volume-label high">High</span>
+        </div>
+    </div>
+</ion-footer>
