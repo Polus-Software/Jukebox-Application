@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Interfaces\**" />
+    <EmbeddedResource Remove="Interfaces\**" />
+    <None Remove="Interfaces\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Interfaces\IPOSService.cs" />
+    <Compile Include="Interfaces\JukeBox\IGlobalListService.cs" />
+    <Compile Include="Interfaces\JukeBox\IHttpClientService.cs" />
+    <Compile Include="Interfaces\JukeBox\IJukeBoxService.cs" />
+    <Compile Include="Interfaces\JukeBox\ISoundTrackService.cs" />
+    <Compile Include="Interfaces\JukeBox\IWishListService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Entities\" />
+  </ItemGroup>
+
+</Project>
